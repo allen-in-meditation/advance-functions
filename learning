@@ -1,0 +1,75 @@
+function getParksByState(parks, state) {
+  let parksByState = [];
+  const parksFilter = parks.filter((parks) => {
+    if (parks.location.state === state) {
+      parksByState.push(parks);
+    }
+  });
+  return parksByState;
+}
+
+function getWishlistParksForUser(parks, users, username) {  
+  let result = parks.filter((park) => users[username].wishlist.includes(park.id))
+  return result;
+  
+  if (!users.wishlist) return wishlistByUser;
+ };
+
+function userHasVisitedAllParksInState(parks, users, state, username) {
+  const parksInState = getParksByState(parks, state);
+  const parksVisitedByUser = users[username].visited;
+  const parksById = parksInState.map((park) => park.id);
+  let result;
+  
+  parksVisitedByUser.forEach((park) => {
+    parksById.forEach((parkId) => {
+      if(park === parkId) {
+        result = true;
+      } else {
+        result = false;
+      }
+    });
+  });
+  return result;
+}
+
+function userHasVisitedParkOnWishlist(users, usernameOne, usernameTwo) {
+  let result;
+  let usernameOneV = users[usernameOne].visited;
+  let usernameTwoW = users[usernameTwo].wishlist;
+  
+  usernameOneV.forEach((visited) => {
+    usernameTwoW.forEach((wish) => {
+      if (wish === visited) {
+        result = true;
+      } else {
+        result = false;
+      }
+    });
+  });  
+ return result;
+}
+
+
+function getUsersForUserWishlist(users, username) {
+  let usersWhoHaveVisitedParks = [];
+  let userWishlist = users[username].wishlist;
+  const usersName = users[username]
+  
+  
+  for (let name in users) {
+    let userVisited = users[name].visited;
+    const username = name;
+    
+    for (let i = 0; i < userWishlist.length; i++) {
+      for (let j = 0; j < userVisited.length; j++) {
+         if (userWishlist[i] === userVisited[j] && !usersWhoHaveVisitedParks.includes(username)) {
+           usersWhoHaveVisitedParks.push(username);
+         };   
+      };
+    };
+  };
+  return usersWhoHaveVisitedParks;
+  if (usersWhoHaveVisitedParks = []) {return usersWhoHaveVisitedParks};  
+};
+  
